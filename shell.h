@@ -12,4 +12,10 @@ int _putchar(char c);
 int _puts(char *str);
 
 
+/* for  reading  arguments*/
+char *read_args_stream(void);
+char *read_args(void);
+
+
+
 #endif
