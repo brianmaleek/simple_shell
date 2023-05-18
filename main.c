@@ -46,7 +46,7 @@ void terminal_non_interactive(void)
 
 		if (check >= 0)
 			exit(check);
-
+	}
 }
 
 int main(void)
