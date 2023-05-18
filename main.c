@@ -6,7 +6,7 @@
  * terminal_interg
 */
 
-void terminal_interative(void)
+void terminal_Interactive(void)
 {
 	char *input;
 	char **line_args;
@@ -49,4 +49,11 @@ void terminal_non_interactive(void)
 	}
 }
 
-
+int main(void)
+{
+	if (isatty(STDIN_FILENO))
+		terminal_Interactive();
+	else
+		terminal_non_interactive();
+	return (0);
+}
