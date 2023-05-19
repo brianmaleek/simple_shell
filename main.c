@@ -27,6 +27,7 @@ void terminal_Interactive(void)
 	_puts("$: ");
 }
 
+
 /**
  * terminal_non_interactive : non interactive mode
 */
@@ -48,6 +49,7 @@ void terminal_non_interactive(void)
 			exit(check);
 	}
 }
+
 
 int main(void)
 {
