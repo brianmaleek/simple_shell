@@ -11,10 +11,15 @@
 #define TOK_BUFSIZE 64
 #define DELIMITER " \t\r\n\a"
 
+
+
 /*helper functions*/
 int _putchar(char c);
 void _puts(char *str);
 size_t _strlen(char *str);
+int _strcmp(char *s1, char *s2);
+int _atoi(char *s);
+
 
 /*builtin functions*/
 int exec_cd(char **args);
@@ -25,6 +30,10 @@ int exec_help(char **args);
 /* for  reading  arguments*/
 char *read_args_stream(void);
 char *read_args(void);
+
+/*to execute*/
+int execute(char **args);
+int builtin_args_exec(char **args);
 
 char **split_to_tokens(char *tok);
 

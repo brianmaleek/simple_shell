@@ -12,20 +12,21 @@ void terminal_Interactive(void)
 	char **line_args;
 	int check = -1;
 
-	_puts("$: ");
-	while (check == -1)
-	{
+	
+	
+	do {
+		_puts("$: ");
 		input = read_args();
 		line_args = split_to_tokens(input);
-		/*check = builtin_exec(line_args);*/
+		check = builtin_args_exec(line_args);
 		/*manage memory*/
 		free(input);
 		free(line_args);
 
 		if (check >= 0)
 			exit(check);
-	}
-	_puts("$: ");
+	} while (check == -1);
+	
 }
 
 /**
@@ -43,7 +44,7 @@ void terminal_non_interactive(void)
 	{
 		input = read_args_stream();
 		line_args = split_to_tokens(input);
-		/*check = builtin_exec(line_args);*/
+		check = builtin_args_exec(line_args);
 		/*manage memory*/
 		free(input);
 		free(line_args);

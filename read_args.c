@@ -12,7 +12,7 @@ char *read_args(void)
 	char *input_line = NULL;
 	size_t bufsize = 0;
 
-	if (getline(&input_line, &bufsize, stdin))
+	if (getline(&input_line, &bufsize, stdin) == -1)
 	{
 		if (feof(stdin))
 		{
