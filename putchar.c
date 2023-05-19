@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- * _putchar - 
+ * _putchar - ....
  * @c:character to output
  *
  * Return: On success 1/ on error 0
@@ -18,9 +18,11 @@ int _putchar(char c)
 void _puts(char *str)
 {
 	int c = 0;
+
 	while (str[c])
 	{
 		_putchar(str[c]);
 		c++;
 	}
 }
+
