@@ -1,9 +1,7 @@
 #include "shell.h"
 
-/*interactive terminal*/
-
 /**
- * terminal_interg
+ * terminal_interactive : interactive mode
 */
 
 void terminal_Interactive(void)
@@ -27,7 +25,6 @@ void terminal_Interactive(void)
 	_puts("$: ");
 }
 
-
 /**
  * terminal_non_interactive : non interactive mode
 */
@@ -50,7 +47,10 @@ void terminal_non_interactive(void)
 	}
 }
 
-
+/**
+ * main - entry point
+ * Return: 0 on success
+*/
 int main(void)
 {
 	if (isatty(STDIN_FILENO))

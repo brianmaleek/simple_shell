@@ -3,7 +3,7 @@
 #include "shell.h"
 
 /**
- * read_args - ...
+ * read_args - read args from stream
  * Return: input line
 */
 
