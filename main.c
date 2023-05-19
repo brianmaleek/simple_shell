@@ -15,8 +15,8 @@ void terminal_Interactive(void)
 	while(check == -1)
 	{
 		input = read_args();
-		line_args = split_to_tokens();
-		check = builtin_exec(line_args);
+		line_args = split_to_tokens(input);
+		/*check = builtin_exec(line_args);*/
 		/*manage memory*/
 		free(input);
 		free(line_args);
@@ -38,8 +38,8 @@ void terminal_non_interactive(void)
 	while(check == -1)
 	{
 		input = read_args_stream();
-		line_args = split_to_tokens();
-		check = builtin_exec(line_args);
+		line_args = split_to_tokens(input);
+		/*check = builtin_exec(line_args);*/
 		/*manage memory*/
 		free(input);
 		free(line_args);

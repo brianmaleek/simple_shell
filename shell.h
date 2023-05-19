@@ -7,15 +7,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define TOK_BUFSIZE 64
+#define DELIMITER " \t\r\n\a"
 /*for output*/
 int _putchar(char c);
-int _puts(char *str);
+void _puts(char *str);
 
 
 /* for  reading  arguments*/
 char *read_args_stream(void);
 char *read_args(void);
 
+char **split_to_tokens(char *tok);
 
 
 #endif
