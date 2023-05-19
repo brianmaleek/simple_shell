@@ -2,7 +2,7 @@
 
 /**
  * split_to_tokens - split input to tokens
- * @token: input to split
+ * @tok: input to split
  * Return: pointer to array of tokens
  */
 
@@ -19,8 +19,7 @@ char **split_to_tokens(char *tok)
 		exit(EXIT_FAILURE);
 	}
 	token = strtok(tok, DELIMITER);
-	do
-	{
+	do {
 		if (token[0] == '#')
 		{
 			break;
