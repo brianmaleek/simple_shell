@@ -13,6 +13,7 @@ int _putchar(char c)
 
 /**
  * _puts - function to print string
+ * @str : string to print
 */
 
 void _puts(char *str)
