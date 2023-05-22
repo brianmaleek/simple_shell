@@ -11,7 +11,7 @@
 #define TOK_BUFSIZE 64
 #define DELIMITER " \t\r\n\a"
 
-
+extern char **environ;
 
 /*helper functions*/
 int _putchar(char c);

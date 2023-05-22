@@ -31,11 +31,14 @@ int execute(char **args)
 	}
 	else
 	{
+		do {
 		/*start parent*/
-		while (!WIFEXITED(check) && !WIFSIGNALED(check))
-		{
-			waitpid(process_id, &check, WUNTRACED);
-		}
+			if (waitpid(process_id, &check, WUNTRACED) == -1)
+			{
+				perror("error: waitpid");
+				return (-1);
+			}
+		} while (!WIFEXITED(check) && !WIFSIGNALED(check));
 	}
 	return (-1);
 }

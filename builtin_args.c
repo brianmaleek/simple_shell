@@ -3,17 +3,15 @@
 /**
  * exec_cd - change directory
  * @args: arguments
- * 
- * return: 1 on success, 0 on failure
+ *
+ * Return: 1 on success, 0 on failure
  */
-
-extern char **environ;
 
 int exec_cd(char **args)
 {
 	if (args[1] == NULL)
 	{
-		fprintf(stderr,"hsh: expected argument to \"cd\"\n");
+		perror("hsh: expected argument to \"cd\"\n");
 	}
 	else
 	{
@@ -28,20 +26,24 @@ int exec_cd(char **args)
 /**
  * exec_env - display environment variables
  * @args: arguments
- * 
- * return: 1 on success, 0 on failure
+ *
+ * Return: 1 on success, 0 on failure
  */
 
 int exec_env(char **args)
 {
-	int position = 0;
+	int position, j;
 	(void) (**args);
-	
-	while (environ[position])
+
+	for (position = 0; environ[position] != NULL; position++)
 	{
-		write(STDOUT_FILENO, environ[position], _strlen(environ[position]));
-		_puts("\n");
-		position++;
+		char *env_var = environ[position];
+
+		for (j = 0; env_var[j] != '\0'; j++)
+		{
+			write(STDOUT_FILENO, &env_var[j], 1);
+		}
+		write(STDOUT_FILENO, "\n", 1);
 	}
 	return (1);
 }
@@ -49,8 +51,8 @@ int exec_env(char **args)
 /**
  * exec_exit - exit shell
  * @args: arguments
- * 
- * return: 1 on success, 0 on failure
+ *
+ * Return: 1 on success, 0 on failure
  */
 
 int exec_exit(char **args)
@@ -70,8 +72,8 @@ int exec_exit(char **args)
 /**
  * exec_help - display help
  * @args: arguments
- * 
- * return: 1 on success, 0 on failure
+ *
+ * Return: 1 on success, 0 on failure
  */
 
 int exec_help(char **args)
@@ -82,7 +84,7 @@ int exec_help(char **args)
 		"exit",
 		"env"
 	};
-	long unsigned int i;
+	unsigned long int i;
 	(void) (**args);
 
 	_puts("help: \n");

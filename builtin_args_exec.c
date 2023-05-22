@@ -23,7 +23,7 @@ int builtin_args_exec(char **args)
 		&exec_help
 	};
 
-	long unsigned int position = 0;
+	unsigned long int position = 0;
 
 	/*check if there is a command*/
 	if (args[0])
@@ -35,8 +35,6 @@ int builtin_args_exec(char **args)
 				return ((*argument_funcs[position])(args));
 			}
 		}
-		return (execute(args));
 	}
-	/*no command*/
-	return (-1);
+	return (execute(args));
 }

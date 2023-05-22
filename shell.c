@@ -12,8 +12,7 @@ void terminal_Interactive(void)
 	char **line_args;
 	int check = -1;
 
-	
-	
+
 	do {
 		_puts("$: ");
 		input = read_args();
@@ -26,7 +25,7 @@ void terminal_Interactive(void)
 		if (check >= 0)
 			exit(check);
 	} while (check == -1);
-	
+
 }
 
 /**
@@ -60,7 +59,7 @@ void terminal_non_interactive(void)
 */
 int main(void)
 {
-	if (isatty(STDIN_FILENO))
+	if (isatty(STDIN_FILENO) == 1)
 		terminal_Interactive();
 	else
 		terminal_non_interactive();
