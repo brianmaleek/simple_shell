@@ -1,52 +1,36 @@
 /*basic execute*/
-
 #include "shell.h"
-
 /**
  * execute - create a new execute process
  * @args: commands
  *
  * Return: 1 or 0
 */
-
 int execute(char **args)
 {
 	pid_t process_id;
 	int check;
 
 	process_id = fork();
-
 	if (process_id == 0)
 	{
-		/*start child process*/
-		if (execve(args[0], args, environ) == -1)
+		if (execve(args[0], args, environ) == -1)/*start child process*/
 		{
-			char command_path[BUFSIZE];
-			char *path_token;
-			char *path = getenv("PATH");
-
-			_strcpy(command_path, args[0]);
-
-			path_token = strtok(path, ":");
+			char command_path[BUFSIZE], *path_token = strtok(getenv("PATH"), ":");
 
 			while (path_token)
 			{
 				_strcpy(command_path, path_token);
-				_strcat(command_path, "/");
-				_strcat(command_path, args[0]);
-				if (access(command_path, F_OK) == 0)
-				{
-					if (execve(command_path, args, environ) == -1)
-					{
-						perror("execve error");
-					}
-					exit(EXIT_FAILURE);
-				}
+				_strcat(path_token, '/');
+				_strcat(path_token, args[0]);
+				if (access(command_path, F_OK) == 0
+					&& execve(command_path, args, environ) != -1)
+					exit(EXIT_SUCCESS);
 				path_token = strtok(NULL, ":");
 			}
-			path_token = strtok(NULL, ":");
+			write(STDERR_FILENO, args[0], _strlen(args[0]));
+			write(STDERR_FILENO, ": not found\n", 12);
 		}
-		perror("execve error");
 		exit(EXIT_FAILURE);
 	}
 	else if (process_id < 0)
@@ -56,16 +40,7 @@ int execute(char **args)
 	else
 	{
 		do {
-		/*start parent*/
-			if (waitpid(process_id, &check, WUNTRACED) == -1)
-			{
-				perror("error: waitpid");
-				return (-1);
-			}
-			else
-			{
-				waitpid(process_id, &check, WUNTRACED);
-			}
+			waitpid(process_id, &check, WUNTRACED);
 		} while (!WIFEXITED(check) && !WIFSIGNALED(check));
 	}
 	return (-1);
