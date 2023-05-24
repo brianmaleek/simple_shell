@@ -26,14 +26,15 @@ int builtin_args_exec(char **args)
 	unsigned long int position = 0;
 
 	/*check if there is a command*/
-	if (args[0])
+	if (args[0] == NULL)
 	{
-		for (; position < sizeof(argument_list) / sizeof(char *); position++)
+		return (1);
+	}
+	for (; position < sizeof(argument_list) / sizeof(char *); position++)
+	{
+		if (_strcmp(args[0], argument_list[position]) == 0)
 		{
-			if (_strcmp(args[0], argument_list[position]) == 0)
-			{
-				return ((*argument_funcs[position])(args));
-			}
+			return ((*argument_funcs[position])(args));
 		}
 	}
 	return (execute(args));

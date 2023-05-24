@@ -20,7 +20,7 @@ char **split_to_tokens(char *tok)
 	}
 	token = strtok(tok, DELIMITER);
 	do {
-		if (token[0] == '#')
+		if (token && token[0] == '#')
 		{
 			break;
 		}

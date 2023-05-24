@@ -38,6 +38,10 @@ int execute(char **args)
 				perror("error: waitpid");
 				return (-1);
 			}
+			else
+			{
+				waitpid(process_id, &check, WUNTRACED);
+			}
 		} while (!WIFEXITED(check) && !WIFSIGNALED(check));
 	}
 	return (-1);

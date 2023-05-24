@@ -10,6 +10,7 @@
 
 #define TOK_BUFSIZE 64
 #define DELIMITER " \t\r\n\a"
+#define BUFSIZE 1024
 
 extern char **environ;
 
@@ -19,6 +20,7 @@ void _puts(char *str);
 size_t _strlen(char *str);
 int _strcmp(char *s1, char *s2);
 int _atoi(char *s);
+ssize_t read_input(char *buffer, size_t size);
 
 
 /*builtin functions*/
@@ -36,6 +38,5 @@ int execute(char **args);
 int builtin_args_exec(char **args);
 
 char **split_to_tokens(char *tok);
-
 
 #endif

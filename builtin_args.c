@@ -32,20 +32,17 @@ int exec_cd(char **args)
 
 int exec_env(char **args)
 {
-	int position, j;
+	int position = 0;
+
 	(void) (**args);
 
-	for (position = 0; environ[position] != NULL; position++)
+	while (environ[position])
 	{
-		char *env_var = environ[position];
-
-		for (j = 0; env_var[j] != '\0'; j++)
-		{
-			write(STDOUT_FILENO, &env_var[j], 1);
-		}
+		write(STDOUT_FILENO, environ[position], _strlen(environ[position]));
 		write(STDOUT_FILENO, "\n", 1);
+		position++;
 	}
-	return (1);
+	return (-1);
 }
 
 /**
@@ -67,7 +64,6 @@ int exec_exit(char **args)
 		return (_atoi(args[1]));
 	}
 }
-
 
 /**
  * exec_help - display help

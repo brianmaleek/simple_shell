@@ -6,21 +6,50 @@
  */
 char *read_args_stream(void)
 {
-	char *input_line = NULL;
-	size_t bufsize = 0;
+	char *input_line = malloc(sizeof(char) * BUFSIZE);
 	ssize_t bytes_read = 0;
+	int position = 0;
+	int bufsize = BUFSIZE;
 
-	bytes_read = getline(&input_line, &bufsize, stdin);
-	if (bytes_read == -1)
+	if (input_line == NULL)
 	{
-		_puts("getline error in read_stream\n");
-		free(input_line);
-		exit(EXIT_FAILURE);
+		perror("error in read_args_stream.c: malloc failed\n");
+		return (NULL);
 	}
-	else if (bytes_read > 0 && input_line[bytes_read - 1] == '\n')
+	while (1)
 	{
-		input_line[bytes_read - 1] = '\0';
-	}
+		char *buffer = input_line + position;
+		size_t remaining_size = bufsize - position;
 
-	return (input_line);
+		bytes_read = read_input(buffer, remaining_size);
+
+		if (bytes_read == -1)
+		{
+			perror("error reading stdin");
+			exit(EXIT_FAILURE);
+		}
+		else if (bytes_read == 0) /* EOF*/
+		{
+			break;
+		}
+		position += bytes_read;
+
+		if (position >= bufsize - 1)
+		{
+			bufsize += bufsize;
+			input_line = realloc(input_line, sizeof(char) * bufsize);
+			if (input_line == NULL)
+			{
+				perror("error in read_args_stream.c: realloc failed\n");
+				exit(EXIT_FAILURE);
+			}
+		}
+		if (input_line[position - 1] == '\n')
+		{
+			input_line[position - 1] = '\0';
+			return (input_line);
+		}
+	}
+	free(input_line);
+	exit(EXIT_SUCCESS);
 }
