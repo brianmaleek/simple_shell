@@ -20,7 +20,7 @@ int exec_cd(char **args)
 			perror("error in exec_cd.c: change directory failed\n");
 		}
 	}
-	return (-1);
+	return (1);
 }
 
 /**
@@ -42,7 +42,7 @@ int exec_env(char **args)
 		write(STDOUT_FILENO, "\n", 1);
 		position++;
 	}
-	return (-1);
+	return (1);
 }
 
 /**
@@ -55,14 +55,7 @@ int exec_env(char **args)
 int exec_exit(char **args)
 {
 	(void) (**args);
-	if (args[1] == NULL)
-	{
-		return (0);
-	}
-	else
-	{
-		return (_atoi(args[1]));
-	}
+	exit(EXIT_SUCCESS);
 }
 
 /**
@@ -90,6 +83,6 @@ int exec_help(char **args)
 		_puts(argument_str[i]);
 		_puts("\n");
 	}
-	return (-1);
+	return (1);
 }
 
