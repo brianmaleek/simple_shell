@@ -14,6 +14,7 @@ int execute(char **args)
 {
 	pid_t process_id;
 	int check;
+
 	process_id = fork();
 	/*get program name*/
 
@@ -23,9 +24,9 @@ int execute(char **args)
 		if (execvp(args[0], args) == -1)
 		{
 			write(STDERR_FILENO, ": ", 2);
-			write(STDERR_FILENO, args[0],_strlen(args[0]));
+			write(STDERR_FILENO, args[0], _strlen(args[0]));
 			write(STDERR_FILENO, ": not found\n", 12);
-			
+
 		}
 		exit(EXIT_FAILURE);
 	}
