@@ -19,10 +19,34 @@ int execute(char **args)
 	if (process_id == 0)
 	{
 		/*start child process*/
-		if (execvp(args[0], args) == -1)
+		if (execve(args[0], args, environ) == -1)
 		{
-			perror("error");
+			char command_path[BUFSIZE];
+			char *path_token;
+			char *path = getenv("PATH");
+
+			_strcpy(command_path, args[0]);
+
+			path_token = strtok(path, ":");
+
+			while (path_token)
+			{
+				_strcpy(command_path, path_token);
+				_strcat(command_path, "/");
+				_strcat(command_path, args[0]);
+				if (access(command_path, F_OK) == 0)
+				{
+					if (execve(command_path, args, environ) == -1)
+					{
+						perror("execve error");
+					}
+					exit(EXIT_FAILURE);
+				}
+				path_token = strtok(NULL, ":");
+			}
+			path_token = strtok(NULL, ":");
 		}
+		perror("execve error");
 		exit(EXIT_FAILURE);
 	}
 	else if (process_id < 0)
