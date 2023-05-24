@@ -1,6 +1,30 @@
 #include "shell.h"
 
 /**
+ * sort_comments - handle comments
+ * @com: comand to handle
+ * Return: cmd without commments
+*/
+
+char *sort_comments(char *com)
+{
+	int pos = 0;
+
+	if (com == NULL)
+		return (NULL);
+
+	do {
+		if (com[pos] == '#')
+		{
+			com[pos] = '\0';
+			break;
+		}
+		pos++;
+	} while (com[pos] != '\0');
+	return (com);
+}
+
+/**
  * terminal_Interactive - interactive mode
  * @Description -  function to run the shell in interactive mode
  * return: void
@@ -8,7 +32,7 @@
 
 void terminal_Interactive(void)
 {
-	char *input;
+	char *input, *com;
 	char **line_args;
 	int check = -1;
 
@@ -16,7 +40,8 @@ void terminal_Interactive(void)
 	do {
 		_puts("$: ");
 		input = read_args();
-		line_args = split_to_tokens(input);
+		com = sort_comments(input);
+		line_args = split_to_tokens(com);
 		check = builtin_args_exec(line_args);
 		/*manage memory*/
 		free(input);
