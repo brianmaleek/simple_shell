@@ -11,7 +11,7 @@ int exec_cd(char **args)
 {
 	if (args[1] == NULL)
 	{
-		perror("hsh: expected argument to \"cd\"\n");
+		_puts("hsh: expected argument to \"cd\"\n");
 	}
 	else
 	{

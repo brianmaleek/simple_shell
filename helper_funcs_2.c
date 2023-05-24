@@ -54,3 +54,27 @@ char *ptr = dest;
 	*ptr = '\0';
 	return (dest);
 }
+
+
+/**
+ * _getenv- get environment variables
+ * @name: the variable
+ *
+ * Return: Env
+*/
+
+char *_getenv(char *name)
+{
+	size_t name_len = _strlen(name);
+	char **env = __environ;
+	for(; *env != NULL; env++)
+	{
+		if(_strcmp(*env, name) == 0
+			&& (*env[name_len] == '='))
+		{
+			return &(*env)[name_len + 1];
+		}
+	}
+	return (NULL);
+	
+}

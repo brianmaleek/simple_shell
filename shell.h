@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #define TOK_BUFSIZE 64
 #define DELIMITER " \t\r\n\a"
@@ -23,6 +25,7 @@ int _atoi(char *s);
 ssize_t read_input(char *buffer, size_t size);
 char *_strcpy(char *dest, const char *src);
 char *_strcat(char *dest, const char *src);
+char *_getenv(char *name);
 
 /*builtin functions*/
 int exec_cd(char **args);
