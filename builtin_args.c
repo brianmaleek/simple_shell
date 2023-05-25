@@ -34,13 +34,18 @@ int exec_env(char **args)
 {
 	int position = 0;
 
-	(void) (**args);
-
-	while (environ[position])
+	if (args[1] == NULL)
 	{
-		write(STDOUT_FILENO, environ[position], _strlen(environ[position]));
-		write(STDOUT_FILENO, "\n", 1);
-		position++;
+		while (environ[position] != NULL)
+		{
+			_puts(environ[position]);
+			_puts("\n");
+			position++;
+		}
+	}
+	else
+	{
+		_puts("hsh: expected argument to \"env\"\n");
 	}
 	return (-1);
 }
