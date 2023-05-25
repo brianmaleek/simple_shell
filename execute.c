@@ -26,7 +26,6 @@ int execute(char **args)
 			write(STDERR_FILENO, ": ", 2);
 			write(STDERR_FILENO, args[0], _strlen(args[0]));
 			write(STDERR_FILENO, ": not found\n", 12);
-
 		}
 		exit(EXIT_FAILURE);
 	}
