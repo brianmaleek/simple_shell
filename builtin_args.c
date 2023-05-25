@@ -55,7 +55,14 @@ int exec_env(char **args)
 int exec_exit(char **args)
 {
 	(void) (**args);
-	exit(EXIT_SUCCESS);
+	if (args[1] == NULL)
+	{
+		return (0);
+	}
+	else
+	{
+		return (_atoi(args[1]));
+	}
 }
 
 /**

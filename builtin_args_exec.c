@@ -30,6 +30,12 @@ int builtin_args_exec(char **args)
 	{
 		return (1);
 	}
+	/* check if the command is "exist" */
+	if (_strcmp(args[0], "exist") == 0)
+	{
+		return (exec_exit(args));
+	}
+
 	for (; position < sizeof(argument_list) / sizeof(char *); position++)
 	{
 		if (_strcmp(args[0], argument_list[position]) == 0)
