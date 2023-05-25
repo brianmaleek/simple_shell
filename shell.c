@@ -7,7 +7,7 @@
 
 void terminal_Interactive(void)
 {
-	char *input, *com;
+	char *input;
 	char **line_args;
 	int check = -1;
 
