@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * terminal_Interactive - interactive mode
  * @Description -  function to run the shell in interactive mode
